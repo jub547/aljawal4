@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: jub547/aljawal4  # استبدل بمستودعك على GitHub
+  branch: master
 
 # مكان حفظ الصور
 media_folder: "images/uploads"      # المجلد الذي تُحفظ فيه الصور
