@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آفاق - متجر الموبايلات والأجهزة اللوحية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --gold-color: #f1c40f;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        /* التكبير عند التحويم */
+        .scale-hover {
+            transition: var(--transition);
+        }
+
+        .scale-hover:hover {
+            transform: scale(1.03);
+        }
+
+        /* زر الاشتراك */
+        .btn-subscribe {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-weight: bold;
+        }
+
+        .btn-subscribe:hover {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* الشريط العلوي */
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--gold-color);
+            transform: translateY(-2px);
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            color: var(--dark-color);
+            margin-right: 15px;
+            font-size: 18px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        /* السلايدر الرئيسي */
+        .hero-slider {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-content {
+            position: absolute;
+            right: 10%;
+            max-width: 500px;
+            color: white;
+            text-align: right;
+            z-index: 2;
+        }
+
+        .slide-content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: white;
+            opacity: 0.7;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--secondary-color);
+            opacity: 1;
+        }
+
+        /* العروض اليومية */
+        .daily-offers {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .offer-timer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+        }
+
+        .offer-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .product-rating {
+            color: var(--gold-color);
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart, .view-details {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+        }
+
+        .view-details {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .view-details:hover {
+            background-color: #ddd;
+        }
+
+        /* الأقسام */
+        .categories {
+            padding: 60px 0;
+            background-color: var(--light-color);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .category-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .category-overlay p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .category-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* المنتجات المميزة */
+        .featured-products {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        /* النشرة البريدية */
+        .newsletter {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+        }
+
+        .newsletter-btn {
+            padding: 15px 25px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* الفوتر */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--secondary-color);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3, .footer-social h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after, .footer-social h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            right: 0;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-right: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            margin-left: 10px;
+            color: var(--secondary-color);
+            font-size: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .developer-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .developer-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* صفحة الاتصال */
+        .contact-page {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-info-box {
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* القائمة المتنقلة */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 0 0 20px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
+            }
+
+            .slide-content {
+                right: 5%;
+                max-width: 400px;
+            }
+
+            .slide-content h2 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-slider {
+                height: 400px;
+            }
+
+            .slide-content {
+                right: 20px;
+                left: 20px;
+                max-width: none;
+                text-align: center;
+            }
+
+            .slide-content h2 {
+                font-size: 28px;
+            }
+
+            .slide-content p {
+                font-size: 16px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-btn {
+                border-radius: 30px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-bar-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-slider {
+                height: 350px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .product-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .add-to-cart, .view-details {
+                width: 100%;
+            }
+        }
+
+        /* تأثيرات حركية */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .slide-in-left {
+            animation: slideInFromLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .slide-in-right {
+            animation: slideInFromRight 0.8s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* تأثيرات التمرير */
+        [data-aos] {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        [data-aos="fade-up"] {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        [data-aos="fade-up"].aos-animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        [data-aos="fade-down"] {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+
+        [data-aos="fade-down"].aos-animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        [data-aos="zoom-in"] {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        [data-aos="zoom-in"].aos-animate {
+            transform: scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="welcome-message">مرحباً بكم في متجر آفاق للموبايلات والأجهزة اللوحية</div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/40" alt="آفاق">
+                <div class="logo-text">آ<span>فاق</span></div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">المنتجات</a></li>
+                <li><a href="#">العروض</a></li>
+                <li><a href="#">الأقسام</a></li>
+                <li><a href="#">من نحن</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- السلايدر الرئيسي -->
+    <section class="hero-slider">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1512054502232-10a0a035d672?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2 class="slide-in-right">أحدث الموبايلات بأفضل الأسعار</h2>
+                        <p class="slide-in-right" style="animation-delay: 0.2s;">اكتشف أحدث الموديلات من أشهر الماركات العالمية</p>
+                        <button class="btn-subscribe slide-in-right" style="animation-delay: 0.4s;">تسوق الآن</button>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2>عروض خاصة على الأجهزة اللوحية</h2>
+                        <p>خصومات تصل إلى 30% على مجموعة مختارة من الأجهزة اللوحية</p>
+                        <button class="btn-subscribe">استفد من العرض</button>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80');">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2>أجهزة مستعملة بجودة عالية</h2>
+                        <p>اختر من بين مجموعة واسعة من الأجهزة المستعملة المفحوصة بعناية</p>
+                        <button class="btn-subscribe">تصفح الأجهزة</button>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- العروض اليومية -->
+    <section class="daily-offers">
+        <div class="section-title">
+            <h2>العروض اليومية</h2>
+        </div>
+
+        <div class="offer-timer pulse">
+            <i class="fas fa-clock"></i> ينتهي العرض خلال: 12:45:32
+        </div>
+
+        <div class="offer-products">
+            <div class="product-card scale-hover" data-aos="fade-up">
+                <span class="product-badge">خصم 20%</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="هاتف سامسونج">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف سامسونج</div>
+                    <h3 class="product-title">سامسونج جالاكسي S22 الترا</h3>
+                    <div class="product-price">
+                        <span class="original-price">$999</span>
+                        <span class="current-price">$799</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-up" data-aos-delay="100">
+                <span class="product-badge">جديد</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="آيفون">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف آيفون</div>
+                    <h3 class="product-title">آيفون 14 برو ماكس</h3>
+                    <div class="product-price">
+                        <span class="current-price">$1,199</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-up" data-aos-delay="200">
+                <span class="product-badge">مستعمل</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="تابلت">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">أجهزة لوحية</div>
+                    <h3 class="product-title">آيباد برو 12.9 بوصة 2021</h3>
+                    <div class="product-price">
+                        <span class="original-price">$1,099</span>
+                        <span class="current-price">$849</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-up" data-aos-delay="300">
+                <span class="product-badge">عرض حصري</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="هاتف شاومي">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف شاومي</div>
+                    <h3 class="product-title">شاومي ريدمي نوت 11 برو</h3>
+                    <div class="product-price">
+                        <span class="original-price">$299</span>
+                        <span class="current-price">$249</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- الأقسام -->
+    <section class="categories">
+        <div class="section-title">
+            <h2>تصفح أقسامنا</h2>
+        </div>
+
+        <div class="category-grid">
+            <div class="category-card" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="هواتف جديدة" class="category-image">
+                <div class="category-overlay">
+                    <h3>هواتف جديدة</h3>
+                    <p>أحدث الموديلات من جميع الماركات العالمية</p>
+                    <button class="category-btn">تصفح القسم</button>
+                </div>
+            </div>
+
+            <div class="category-card" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="أجهزة لوحية" class="category-image">
+                <div class="category-overlay">
+                    <h3>أجهزة لوحية</h3>
+                    <p>أفضل الأجهزة اللوحية بجميع المقاسات</p>
+                    <button class="category-btn">تصفح القسم</button>
+                </div>
+            </div>
+
+            <div class="category-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1605170439002-90845e8c0137?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1622&q=80" alt="هواتف مستعملة" class="category-image">
+                <div class="category-overlay">
+                    <h3>هواتف مستعملة</h3>
+                    <p>أجهزة مستعملة بجودة عالية وضمان</p>
+                    <button class="category-btn">تصفح القسم</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المنتجات المميزة -->
+    <section class="featured-products">
+        <div class="section-title">
+            <h2>منتجات مميزة</h2>
+        </div>
+
+        <div class="offer-products">
+            <div class="product-card scale-hover" data-aos="fade-down">
+                <span class="product-badge">الأكثر مبيعاً</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1567&q=80" alt="هاتف سامسونج">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف سامسونج</div>
+                    <h3 class="product-title">سامسونج جالاكسي S22 الترا</h3>
+                    <div class="product-price">
+                        <span class="current-price">$799</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-down" data-aos-delay="100">
+                <span class="product-badge">توصية</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="آيفون">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف آيفون</div>
+                    <h3 class="product-title">آيفون 14 برو ماكس</h3>
+                    <div class="product-price">
+                        <span class="current-price">$1,199</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-down" data-aos-delay="200">
+                <span class="product-badge">جديد</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="تابلت">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">أجهزة لوحية</div>
+                    <h3 class="product-title">آيباد برو 12.9 بوصة 2021</h3>
+                    <div class="product-price">
+                        <span class="current-price">$849</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card scale-hover" data-aos="fade-down" data-aos-delay="300">
+                <span class="product-badge">عرض خاص</span>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="هاتف شاومي">
+                </div>
+                <div class="product-details">
+                    <div class="product-category">هواتف شاومي</div>
+                    <h3 class="product-title">شاومي ريدمي نوت 11 برو</h3>
+                    <div class="product-price">
+                        <span class="current-price">$249</span>
+                    </div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">أضف للسلة</button>
+                        <button class="view-details">التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- النشرة البريدية -->
+    <section class="newsletter">
+        <div class="section-title">
+            <h2 class="fade-in">اشترك في نشرتنا البريدية</h2>
+        </div>
+        <p class="fade-in" style="animation-delay: 0.2s;">احصل على آخر العروض والتخفيضات مباشرة إلى بريدك الإلكتروني</p>
+        <form class="newsletter-form fade-in" style="animation-delay: 0.4s;">
+            <input type="email" class="newsletter-input" placeholder="أدخل بريدك الإلكتروني" required>
+            <button type="submit" class="newsletter-btn">اشترك الآن</button>
+        </form>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">آ<span>فاق</span></div>
+                <p>متجر آفاق هو وجهتك الأولى لشراء أحدث الموبايلات والأجهزة اللوحية الجديدة والمستعملة بأسعار تنافسية وجودة عالية.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <span>شارع المدينة المنورة، الرياض، المملكة العربية السعودية</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <span>+966 12 345 6789</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">المنتجات</a></li>
+                    <li><a href="#">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="#">الشروط والأحكام</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h3>تواصل معنا</h3>
+                <form>
+                    <input type="email" placeholder="بريدك الإلكتروني" class="form-control" style="margin-bottom: 15px;">
+                    <textarea placeholder="رسالتك" class="form-control" style="margin-bottom: 15px;"></textarea>
+                    <button type="submit" class="submit-btn">إرسال</button>
+                </form>
+            </div>
+
+            <div class="footer-social">
+                <h3>تابعنا</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="payment-methods" style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 15px;">طرق الدفع</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <i class="fab fa-cc-visa" style="font-size: 30px; color: #fff;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 30px; color: #fff;"></i>
+                        <i class="fab fa-cc-paypal" style="font-size: 30px; color: #fff;"></i>
+                        <i class="fab fa-cc-apple-pay" style="font-size: 30px; color: #fff;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023 متجر آفاق. جميع الحقوق محفوظة.</p>
+            <div class="developer-info">
+                تم التطوير بواسطة <a href="#">Hussam Jubran</a>
+            </div>
+        </div>
+    </footer>
+    <!-- صفحة الاتصال -->
+    <section class="contact-page" id="contact" style="display: none;">
+        <div class="section-title">
+            <h2>اتصل بنا</h2>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info-box" data-aos="fade-right">
+                <h3>معلومات الاتصال</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <span>شارع المدينة المنورة، الرياض، المملكة العربية السعودية</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt contact-icon"></i>
+                    <span>+966 12 345 6789</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span>info@afaq-store.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp contact-icon"></i>
+                    <span>+966 12 345 6789</span>
+                </div>
+
+                <h3 style="margin-top: 30px;">ساعات العمل</h3>
+                <div class="contact-item">
+                    <i class="fas fa-clock contact-icon"></i>
+                    <span>الأحد - الخميس: 9 صباحاً - 10 مساءً</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock contact-icon"></i>
+                    <span>الجمعة - السبت: 4 مساءً - 10 مساءً</span>
+                </div>
+            </div>
+
+            <div class="contact-form-box" data-aos="fade-left">
+                <form class="contact-form">
+                    <h3>أرسل لنا رسالة</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="رقم هاتفك">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="الموضوع">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="رسالتك" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // القائمة المتنقلة
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // تغيير لون شريط التنقل عند التمرير
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // السلايدر الرئيسي
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // تأثيرات التمرير
+        function checkScroll() {
+            const elements = document.querySelectorAll('[data-aos]');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+
+                if (elementPosition < screenPosition) {
+                    element.classList.add('aos-animate');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // عداد العروض اليومية
+        function updateTimer() {
+            const timerElement = document.querySelector('.offer-timer');
+            let time = 12 * 60 * 60; // 12 ساعة بالثواني
+
+            const timer = setInterval(() => {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+
+                timerElement.innerHTML = `<i class="fas fa-clock"></i> ينتهي العرض خلال: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (time <= 0) {
+                    clearInterval(timer);
+                    timerElement.innerHTML = '<i class="fas fa-clock"></i> انتهى العرض';
+                } else {
+                    time--;
+                }
+            }, 1000);
+        }
+
+        updateTimer();
+
+        // محاكاة تغيير عدد العناصر في السلة
+        setInterval(() => {
+            const cartCount = document.querySelector('.cart-count');
+            const randomCount = Math.floor(Math.random() * 5) + 1;
+            cartCount.textContent = randomCount;
+        }, 5000);
+    </script>
+</body>
+</html>
+             
